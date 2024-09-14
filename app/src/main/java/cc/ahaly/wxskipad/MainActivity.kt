@@ -114,7 +114,7 @@ fun LogScreen() {
         ) {
             // 清空日志按钮
             Button(onClick = {
-                MainActivity.currentLog.value = "日志接受中..." // 清空日志
+                MainActivity.currentLog.value = "日志接受中...\n" // 清空日志
                 Toast.makeText(context, "日志已清空", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = "清空日志")
