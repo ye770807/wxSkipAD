@@ -34,9 +34,10 @@ class MainActivity : ComponentActivity() {
         // 注册广播接收器
         logReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
+                var logtag = intent.getStringExtra("log_tag")
                 val logMessage = intent.getStringExtra("log_message") ?: "无日志内容"
                 // 更新日志内容（通过Compose）
-                appendLog(logMessage)
+                appendLog(logtag + "\t" + logMessage)
             }
         }
 
@@ -135,6 +136,7 @@ fun LogScreen() {
         Button(onClick = {
             // 手动发送调试广播
             val intent = Intent("cc.ahaly.wxskipad.LOG_BROADCAST")
+            intent.putExtra("log_tag", "信息\t")
             intent.putExtra("log_message", "这是一条调试日志消息")
             context.sendBroadcast(intent)
             Toast.makeText(context, "测试广播已发送", Toast.LENGTH_SHORT).show()
